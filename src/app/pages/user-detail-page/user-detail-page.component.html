@@ -1,0 +1,131 @@
+<div *ngIf="form; else loading;">
+    <form class="user" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="user-form-wrapper">
+            <fieldset>
+                <legend>General: </legend>
+                <div class="form-control"
+                     [ngClass]="{invalid: (form.get('name').touched || !isAddMode) && form.get('name').invalid}">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" formControlName="name">
+                    <div class="validation" *ngIf="(form.get('name').touched || !isAddMode) && form.get('name').invalid">
+                        <small *ngIf="form.get('name').errors.required">Name is required</small>
+                    </div>
+                </div>
+                <div class="form-control"
+                     [ngClass]="{invalid: (form.get('username').touched || !isAddMode) && form.get('username').invalid}">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" formControlName="username">
+                    <div class="validation" *ngIf="(form.get('username').touched || !isAddMode) && form.get('username').invalid">
+                        <small *ngIf="form.get('username').errors.required">Username is required</small>
+                        <small *ngIf="form.get('username').errors.minlength">
+                            Invalid length:
+                            <p>Min: {{form.get('username').errors.minlength.requiredLength}}, but
+                                actual: {{form.get('username').errors.minlength.actualLength}}
+                            </p>
+                        </small>
+                    </div>
+                </div>
+                <div class="form-control"
+                     [ngClass]="{invalid: (form.get('email').touched || !isAddMode) && form.get('email').invalid}">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" formControlName="email">
+                    <div class="validation" *ngIf="(form.get('email').touched || !isAddMode) && form.get('email').invalid">
+                        <small *ngIf="form.get('email').errors.required">Email is required</small>
+                    </div>
+                </div>
+                <div class="form-control">
+                    <label for="phone">Phone:</label>
+                    <input type="text" id="phone" formControlName="email">
+                </div>
+                <div class="form-control">
+                    <label for="website">Website:</label>
+                    <input type="text" id="website" formControlName="email">
+                </div>
+            </fieldset>
+
+            <fieldset formGroupName="address">
+                <legend>Address: </legend>
+                <div class="form-control"
+                     [ngClass]="{invalid: (form.get('address.street').touched || !isAddMode) && form.get('address.street').invalid}">
+                    <label for="street">Street:</label>
+                    <input type="text" id="street" formControlName="street">
+                    <div class="validation"
+                         *ngIf="(form.get('address.street').touched || !isAddMode) && form.get('address.street').invalid">
+                        <small *ngIf="form.get('address.street').errors.required">Street is required</small>
+                    </div>
+                </div>
+                <div class="form-control">
+                    <label for="suite">Suite: </label>
+                    <input type="text" id="suite" formControlName="suite">
+                </div>
+                <div class="form-control"
+                     [ngClass]="{invalid: (form.get('address.city').touched || !isAddMode) && form.get('address.city').invalid}">
+                    <label for="city">City:</label>
+                    <input type="text" id="city" formControlName="city">
+                    <div class="validation" *ngIf="(form.get('address.city').touched || !isAddMode) && form.get('address.city').invalid">
+                        <small *ngIf="form.get('address.city').errors.required">City is required</small>
+                    </div>
+                </div>
+                <div class="form-control"
+                     [ngClass]="{invalid: (form.get('address.zipcode').touched || !isAddMode) && form.get('address.zipcode').invalid}">
+                    <label for="zipcode">Zipcode:</label>
+                    <input type="text" id="zipcode" formControlName="zipcode">
+                    <div class="validation"
+                         *ngIf="(form.get('address.zipcode').touched || !isAddMode) && form.get('address.zipcode').invalid">
+                        <small *ngIf="form.get('address.zipcode').errors.required">Zipcode is required</small>
+                    </div>
+                </div>
+                <div formGroupName="geo">
+                    <h3>Geo:</h3>
+                    <div class="form-control">
+                        <label for="lat">Lat:</label>
+                        <input type="text" id="lat" formControlName="lat">
+                    </div>
+                    <div class="form-control">
+                        <label for="lng">Lng:</label>
+                        <input type="text" id="lng" formControlName="lng">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset formGroupName="company">
+                <legend>Company: </legend>
+                <div class="form-control">
+                    <label for="companyName">Name: </label>
+                    <input type="text" id="companyName" formControlName="name">
+                </div>
+                <div class="form-control">
+                    <label for="companyCatchPhrase">Catch phrase: </label>
+                    <input type="text" id="companyCatchPhrase" formControlName="catchPhrase">
+                </div>
+                <div class="form-control">
+                    <label for="companyBs">Bs:</label>
+                    <input type="text" id="companyBs" formControlName="bs">
+                </div>
+            </fieldset>
+        </div>
+        <div class="user-actions-wrapper">
+            <div>
+                <button *ngIf="!submitted; else spinner;"
+                        type="submit" class="btn btn-primary" [disabled]="form.invalid">
+                    <i [class.disabled-icon]="form.invalid" class="fas fa-save fa-2x"></i>
+                </button>
+                <ng-template #spinner>
+                    <i class="fa fa-spinner fa-2x spinner-icon" aria-hidden="true"></i>
+                </ng-template>
+            </div>
+            <div>
+                <button [routerLink]="['/', routeAddress.Users]" type="button" class="btn btn-danger">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<ng-template #loading>
+    <p class="text-center">
+        Loading...
+    </p>
+</ng-template>
+

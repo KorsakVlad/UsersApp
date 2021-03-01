@@ -1,0 +1,11 @@
+.navbar {
+  & ul li:nth-child(2) {
+    margin-left: 10px;
+  }
+  & .nav-links {
+    width: 5%;
+  }
+  & .page-name {
+    width: 95%;
+  }
+}

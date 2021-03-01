@@ -1,0 +1,60 @@
+<div class="user-list-wrapper" *ngIf="users; else loading;">
+
+    <div class="add-user-btn-wrapper">
+        <i routerLink="/{{routeAddress.Users}}/{{routeAddress.Create}}" class="fas fa-plus fa-2x"></i>
+    </div>
+
+    <table>
+        <thead>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Website</th>
+        <th>Company</th>
+        <th>Actions</th>
+        </thead>
+        <tbody>
+        <tr [class.even-row]="idx % 2 === 1" *ngFor="let user of users; let idx = index">
+            <td>{{user.name}}</td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>
+                <ul>
+                    <li *ngIf="user.address.street">Street: {{user.address.street}}</li>
+                    <li *ngIf="user.address.suite">Suite: {{user.address.suite}}</li>
+                    <li *ngIf="user.address.city">City: {{user.address.city}}</li>
+                    <li *ngIf="user.address.zipcode">ZipCode: {{user.address.zipcode}}</li>
+                    <li *ngIf="user.address.geo">
+                        Geo:
+                        <ul class="inside-list">
+                            <li *ngIf="user.address.geo.lat">Lat: {{user.address.geo.lat}}</li>
+                            <li *ngIf="user.address.geo.lng">Lng: {{user.address.geo.lng}}</li>
+                        </ul>
+                    </li>
+                </ul>
+            </td>
+            <td>{{user.phone}}</td>
+            <td>{{user.website}}</td>
+            <td>
+                <ul>
+                    <li *ngIf="user.company.name">Name: {{user.company.name}}</li>
+                    <li *ngIf="user.company.catchPhrase">Catch phrase: {{user.company.catchPhrase}}</li>
+                    <li *ngIf="user.company.bs">Bs: {{user.company.bs}}</li>
+                </ul>
+            </td>
+            <td>
+                <i routerLink="/{{routeAddress.Users}}/{{user.id}}" class="fas fa-edit fa-2x edit-btn"></i>
+                <i (click)="delete(user.id)" class="fa fa-trash fa-2x" aria-hidden="true"></i>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<ng-template #loading>
+    <p class="text-center">
+        Loading...
+    </p>
+</ng-template>

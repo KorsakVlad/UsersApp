@@ -1,0 +1,28 @@
+.edit-btn {
+  margin-bottom: 10px;
+}
+.user-list-wrapper {
+  overflow-x: auto;
+}
+ul {
+  list-style-type: circle;
+
+  &.inside-list {
+    margin-left: 15px;
+    list-style-type: disc;
+  }
+}
+.add-user-btn-wrapper {
+  margin-bottom: 20px;
+}
+.even-row {
+  background-color: #eee;
+}
+td {
+  border: 1px solid #eee;
+  padding-left: 30px;
+
+  .even-row &{
+    border: 1px solid #fff;
+  }
+}

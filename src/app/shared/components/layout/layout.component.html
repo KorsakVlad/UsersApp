@@ -1,0 +1,19 @@
+<nav class="navbar main">
+    <div class="nav-links">
+        <ul>
+            <li>
+                <i [routerLink]="['/', routeAddress.Home]" class="fa fa-home fa-2x" aria-hidden="true"></i>
+            </li>
+            <li>
+                <i [routerLink]="['/', routeAddress.Users]" class="fa fa-list fa-2x" aria-hidden="true"></i>
+            </li>
+        </ul>
+    </div>
+    <div class="page-name">
+        <h1>{{ currentPageName }}</h1>
+    </div>
+</nav>
+
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
